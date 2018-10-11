@@ -1,0 +1,47 @@
+{
+	"manifest_version" : 2,
+	"name" : "CrowdCur",
+	"description" : "Description",
+    "page_action":{
+      "default_icon":"capture16_16.png",
+      "default_popup":"popup2.html",
+      "default_title":"CrowdCur"
+    },
+	"version": "1.1",
+	"icons" : {
+		"128" : "capture16_128.png",
+		"48" : "capture16_48.png",
+		"16" : "capture16_16.png"
+	},
+	"permissions": [
+		"activeTab",
+		"cookies",
+		"storage",
+		"http://crowdcur.com/*",
+		"http://crowdcur.com/crowdcur/*",
+		"http://crowdcur-server-test.us-east-1.elasticbeanstalk.com/*",
+		"http://crowdcur-server-test.us-east-1.elasticbeanstalk.com/crowdcur/*",
+		"http://127.0.0.1:8000/*",
+		"http://127.0.0.1:8000/crowdcur/*"
+	],
+	"background": {
+		"scripts": ["jquery-3.3.1.min.js","background.js"],
+		"persistent": false
+	},
+	"content_scripts":[
+		{
+			"run_at": "document_end",
+			"matches": ["http://127.0.0.1:8000/work/*","http://crowdcur.com/work/*","http://crowdcur-server-test.us-east-1.elasticbeanstalk.com/work/*"],
+            "include_globs": ["http://127.0.0.1:8000/work/?*/","http://crowdcur-server-test.us-east-1.elasticbeanstalk.com/work/?*/","http://crowdcur.com/work/?*/"],
+            "exclude_globs": ["http://127.0.0.1:8000/work?","http://crowdcur-server-test.us-east-1.elasticbeanstalk.com/work?","http://crowdcur.com/work?"],
+			"js":["jquery-3.3.1.min.js","helpers.js","content.js"]
+		},
+		{
+			"run_at": "document_end",
+			"matches": ["http://127.0.0.1:8000/work/","http://crowdcur-server-test.us-east-1.elasticbeanstalk.com/work/","http://crowdcur.com/work/"],
+			"js":["jquery-3.3.1.min.js","helpers.js","content2.js"]
+		}
+	]
+}
+
+
